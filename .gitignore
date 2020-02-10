@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/His6.Base/v15/Server/sqlite3
+/His6.CommonBiz/bin/Debug/zh-Hans
+/His6.CommonBiz/obj/Debug
+/His6.Report/obj/Debug
+/run/zh-Hans
+/His6.Base/obj/Debug
+/His6.Model/obj/Debug
+/His6.Resource/obj/Debug
+/His6.Main/obj/Debug
+/run/Log
+/His6.SysSetup/obj/Debug

@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8A723549-7FA0-48D6-B96B-20BE23AA734B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>His6.SysSetup</RootNamespace>
+    <AssemblyName>His6.SysSetup</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\run\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\run\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v18.2, Version=18.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v18.2.Core, Version=18.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v18.2.Core, Version=18.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v18.2.Core, Version=18.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v18.2.Export, Version=18.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v18.2.Core, Version=18.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v18.2.Core, Version=18.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v18.2, Version=18.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v18.2, Version=18.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v18.2, Version=18.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v18.2, Version=18.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v18.2, Version=18.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraNavBar.v18.2, Version=18.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraTreeList.v18.2, Version=18.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Control\UCMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\UCMenu.Designer.cs">
+      <DependentUpon>UCMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\UCModule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\UCModule.designer.cs">
+      <DependentUpon>UCModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\UCObject.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\UCObject.Designer.cs">
+      <DependentUpon>UCObject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Control\UCSystem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Control\UCSystem.Designer.cs">
+      <DependentUpon>UCSystem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmFunctionPointSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmFunctionPointSetup.Designer.cs">
+      <DependentUpon>FrmFunctionPointSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMenuEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMenuEdit.Designer.cs">
+      <DependentUpon>FrmMenuEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmObjectAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmObjectAdd.Designer.cs">
+      <DependentUpon>FrmObjectAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmModuleAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmModuleAdd.Designer.cs">
+      <DependentUpon>FrmModuleAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMenuSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMenuSetup.Designer.cs">
+      <DependentUpon>FrmMenuSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmParameterEmpEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmParameterEmpEdit.Designer.cs">
+      <DependentUpon>FrmParameterEmpEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmParameterEmpSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmParameterEmpSetup.Designer.cs">
+      <DependentUpon>FrmParameterEmpSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmParameterSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmParameterSetup.Designer.cs">
+      <DependentUpon>FrmParameterSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSelectEmp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSelectEmp.Designer.cs">
+      <DependentUpon>FrmSelectEmp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSelectRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSelectRole.Designer.cs">
+      <DependentUpon>FrmSelectRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSystemEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSystemEdit.Designer.cs">
+      <DependentUpon>FrmSystemEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTestNotice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTestNotice.Designer.cs">
+      <DependentUpon>FrmTestNotice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmObjectChoose.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmObjectChoose.Designer.cs">
+      <DependentUpon>FrmObjectChoose.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmObjectSetup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmObjectSetup.Designer.cs">
+      <DependentUpon>FrmObjectSetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmModuleEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmModuleEdit.designer.cs">
+      <DependentUpon>FrmModuleEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmObjectEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmObjectEdit.Designer.cs">
+      <DependentUpon>FrmObjectEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmTest.Designer.cs">
+      <DependentUpon>FrmTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\CommonDataHelper.cs" />
+    <Compile Include="Model\FunctionPointWithRight.cs" />
+    <Compile Include="Model\SystemWithRight.cs" />
+    <Compile Include="Model\MenuWithRight.cs" />
+    <Compile Include="Model\CDictFunctionPoint.cs" />
+    <Compile Include="Model\CDictModule.cs" />
+    <Compile Include="Model\CDictObject.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Control\UCMenu.resx">
+      <DependentUpon>UCMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\UCModule.resx">
+      <DependentUpon>UCModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\UCObject.resx">
+      <DependentUpon>UCObject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Control\UCSystem.resx">
+      <DependentUpon>UCSystem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmFunctionPointSetup.resx">
+      <DependentUpon>FrmFunctionPointSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMenuEdit.resx">
+      <DependentUpon>FrmMenuEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmObjectAdd.resx">
+      <DependentUpon>FrmObjectAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmModuleAdd.resx">
+      <DependentUpon>FrmModuleAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMenuSetup.resx">
+      <DependentUpon>FrmMenuSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmParameterEmpEdit.resx">
+      <DependentUpon>FrmParameterEmpEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmParameterEmpSetup.resx">
+      <DependentUpon>FrmParameterEmpSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmParameterSetup.resx">
+      <DependentUpon>FrmParameterSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSelectEmp.resx">
+      <DependentUpon>FrmSelectEmp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSelectRole.resx">
+      <DependentUpon>FrmSelectRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSystemEdit.resx">
+      <DependentUpon>FrmSystemEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTestNotice.resx">
+      <DependentUpon>FrmTestNotice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmObjectChoose.resx">
+      <DependentUpon>FrmObjectChoose.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmObjectSetup.resx">
+      <DependentUpon>FrmObjectSetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmModuleEdit.resx">
+      <DependentUpon>FrmModuleEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmObjectEdit.resx">
+      <DependentUpon>FrmObjectEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTest.resx">
+      <DependentUpon>FrmTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\licenses.licx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\His6.Base\His6.Base.csproj">
+      <Project>{7d61796a-e8ac-4652-b66f-e3cec18e2201}</Project>
+      <Name>His6.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\His6.Model\His6.Model.csproj">
+      <Project>{444d5a9c-0405-4aff-93fb-9b7831c3e557}</Project>
+      <Name>His6.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\His6.Resource\His6.Resource.csproj">
+      <Project>{6E6B53D0-0CC4-48CD-82A5-3F697FC7F961}</Project>
+      <Name>His6.Resource</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
