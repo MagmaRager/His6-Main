@@ -109,7 +109,7 @@ namespace His6.Base
         public static string SqlHeader { get; set; }
 
         /// <summary>
-        /// SQL调试请求头
+        /// JWT信息请求头
         /// </summary>
         public static string JwtToken { get; set; }
         /// <summary>

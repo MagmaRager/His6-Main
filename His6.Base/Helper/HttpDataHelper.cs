@@ -6,8 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
-using His6.Base.Helper;
+using System.Windows.Forms;
 
 namespace His6.Base
 {
@@ -77,69 +76,6 @@ namespace His6.Base
         #region GET 数据获取(错误返回异常信息)
 
         /// <summary>
-        ///  restful路径方式GET 字符串数据获取（同步），同时获取状态码，按状态码识别是否成功。
-        /// </summary>
-        /// <param name="url">地址</param>
-        /// <param name="ErrorInfo">错误内容</param>
-        /// <param name="parms">参数值数组</param>
-        /// <returns></returns>
-        //public static String PathGetStringWithInfo(String app, String url, out CustomException ce, params String[] parms)
-        //{
-        //    String result = String.Empty;
-        //    url = GetUrl(app, url);
-        //    if (parms != null && parms.Length > 0)
-        //    {
-        //        url = AppendUrlWithPath(url, parms);
-        //    }
-        //    try
-        //    {
-        //        SetHeader();
-        //        HttpResponseMessage response = _HttpClient.GetAsync(new Uri(url)).Result;
-        //        String statusCode = response.StatusCode.ToString();
-        //        result = response.Content.ReadAsStringAsync().Result;
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            GetToken(response);
-        //            ce = null;
-        //        }
-        //        else if (statusCode.Equals("Conflict")) //业务错误
-        //        {
-        //            CustomExceptionInfo info = JsonConvert.DeserializeObject<CustomExceptionInfo>(result);
-        //            ce = new CustomException(info);
-        //        }
-        //        else //其它错误
-        //        {
-        //            ce = new CustomException(statusCode, "at " + url, "");
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        ce = new CustomException("服务异常", e.Message + " [" + url + "]", e.StackTrace);
-        //        RemoveHeader();
-        //        return String.Empty;
-        //    }
-        //    RemoveHeader();
-        //    return result;
-        //}
-
-        /// <summary>
-        ///  restful路径方式 GET 实体数据获取（同步）,出错抛异常
-        /// </summary>
-        /// <param name="url">地址</param>
-        /// <param name="parms">参数值数组</param>
-        /// <returns></returns>
-        //public static T PathGetWithInfo<T>(String app, String url, out CustomException exInfo, params String[] parms)
-        //{
-        //    String result = PathGetStringWithInfo(app, url, out exInfo, parms);
-        //    if (exInfo != null || result.Length == 0)
-        //    {
-        //        return default(T);
-        //    }
-        //    return JsonConvert.DeserializeObject<T>(result);
-        //}
-
-
-        /// <summary>
         ///  GET 字符串数据获取（同步），同时获取状态码，按状态码识别是否成功。
         /// </summary>
         /// <param name="url">地址</param>
@@ -149,15 +85,15 @@ namespace His6.Base
         public static String GetStringWithInfo(String app, String url, out CustomException ce, List<KeyValuePair<String, String>> parmList = null)
         {
             String result = String.Empty;
-            url = GetUrl(app, url);
+            String urlcomp = GetUrl(app, url);
             if (parmList != null && parmList.Count > 0)
             {
-                url = AppendUrlWithParameter(url, parmList);
+                urlcomp = AppendUrlWithParameter(urlcomp, parmList);
             }
             try
             {
                 SetHeader();
-                HttpResponseMessage response = _HttpClient.GetAsync(url).Result;
+                HttpResponseMessage response = _HttpClient.GetAsync(urlcomp).Result;
                 String statusCode = response.StatusCode.ToString();
                 result = response.Content.ReadAsStringAsync().Result;
                 if (response.IsSuccessStatusCode)
@@ -170,14 +106,22 @@ namespace His6.Base
                     CustomExceptionInfo info = JsonConvert.DeserializeObject<CustomExceptionInfo>(result);
                     ce = new CustomException(info);
                 }
+                else if (statusCode.Equals("PreconditionFailed")) //jwt过期
+                {
+                    if (DoRelogin())
+                    {
+                        return GetStringWithInfo(app, url, out ce, parmList); //产生新的jwt，方法重新执行
+                    }
+                    else ce = new CustomException(statusCode, "at " + urlcomp, "");
+                }
                 else //其它错误
                 {
-                    ce = new CustomException(statusCode, "at " + url, "");
+                    ce = new CustomException(statusCode, "at " + urlcomp, "");
                 }
             }
             catch (Exception e)
             {
-                ce = new CustomException("服务异常", e.Message + " [" + url + "]", e.StackTrace);
+                ce = new CustomException("服务异常", e.Message + " [" + urlcomp + "]", e.StackTrace);
                 RemoveHeader();
                 return String.Empty;
             }
@@ -216,12 +160,12 @@ namespace His6.Base
         public static String HttpPostWithInfo(String app, String url, out CustomException ce, String json)
         {
             String result = String.Empty;
-            url = GetUrl(app, url);
+            String urlcomp = GetUrl(app, url);
             var content = new StringContent(json, Encoding.UTF8, "application/json"); //Content-Type设置
             try
             {
                 SetHeader();
-                HttpResponseMessage response = _HttpClient.PostAsync(url, content).Result;
+                HttpResponseMessage response = _HttpClient.PostAsync(urlcomp, content).Result;
                 String statusCode = response.StatusCode.ToString();
                 result = response.Content.ReadAsStringAsync().Result;
                 if (response.IsSuccessStatusCode)
@@ -234,14 +178,22 @@ namespace His6.Base
                     CustomExceptionInfo info = JsonConvert.DeserializeObject<CustomExceptionInfo>(result);
                     ce = new CustomException(info);
                 }
+                else if (statusCode.Equals("PreconditionFailed")) //jwt过期
+                {
+                    if (DoRelogin())
+                    {
+                        return HttpPostWithInfo(app, url, out ce, json); //产生新的jwt，方法重新执行
+                    }
+                    else ce = new CustomException(statusCode, "at " + urlcomp, "");
+                }
                 else //其它错误
                 {
-                    ce = new CustomException(statusCode, "at " + url, "");
+                    ce = new CustomException(statusCode, "at " + urlcomp, "");
                 }
             }
             catch (Exception e)
             {
-                ce = new CustomException("服务异常", e.Message + " [" + url + "]", e.StackTrace);
+                ce = new CustomException("服务异常", e.Message + " [" + urlcomp + "]", e.StackTrace);
                 RemoveHeader();
                 return String.Empty;
             }
@@ -259,11 +211,11 @@ namespace His6.Base
         {
             String result = String.Empty;
             var content = new FormUrlEncodedContent(list);
-            url = GetUrl(app, url);
+            String urlcomp = GetUrl(app, url);
             try
             {
                 SetHeader();
-                HttpResponseMessage response = _HttpClient.PostAsync(url, content).Result;
+                HttpResponseMessage response = _HttpClient.PostAsync(urlcomp, content).Result;
                 String statusCode = response.StatusCode.ToString();
                 result = response.Content.ReadAsStringAsync().Result;
                 if (response.IsSuccessStatusCode)
@@ -276,14 +228,22 @@ namespace His6.Base
                     CustomExceptionInfo info = JsonConvert.DeserializeObject<CustomExceptionInfo>(result);
                     ce = new CustomException(info);
                 }
+                else if (statusCode.Equals("PreconditionFailed")) //jwt过期
+                {
+                    if (DoRelogin())
+                    {
+                        return HttpPostFormUrlWithInfo(app, url, out ce, list); //产生新的jwt，方法重新执行
+                    }
+                    else ce = new CustomException(statusCode, "at " + urlcomp, "");
+                }
                 else //其它错误
                 {
-                    ce = new CustomException(statusCode, "at " + url, "");
+                    ce = new CustomException(statusCode, "at " + urlcomp, "");
                 }
             }
             catch (Exception e)
             {
-                ce = new CustomException("服务异常", e.Message + " [" + url + "]", e.StackTrace);
+                ce = new CustomException("服务异常", e.Message + " [" + urlcomp + "]", e.StackTrace);
                 RemoveHeader();
                 return String.Empty;
             }
@@ -300,15 +260,15 @@ namespace His6.Base
         public static String HttpPostFormUrlParamWithInfo(String app, String url, out CustomException ce, List<KeyValuePair<String, String>> parmList)
         {
             String result = String.Empty;
-            url = GetUrl(app, url);
+            String urlcomp = GetUrl(app, url);
             if (parmList != null && parmList.Count > 0)
             {
-                url = AppendUrlWithParameter(url, parmList);
+                urlcomp = AppendUrlWithParameter(urlcomp, parmList);
             }
             try
             {
                 SetHeader();
-                HttpResponseMessage response = _HttpClient.PostAsync(url, null).Result;
+                HttpResponseMessage response = _HttpClient.PostAsync(urlcomp, null).Result;
                 String statusCode = response.StatusCode.ToString();
                 result = response.Content.ReadAsStringAsync().Result;
                 if (response.IsSuccessStatusCode)
@@ -321,14 +281,22 @@ namespace His6.Base
                     CustomExceptionInfo info = JsonConvert.DeserializeObject<CustomExceptionInfo>(result);
                     ce = new CustomException(info);
                 }
+                else if (statusCode.Equals("PreconditionFailed")) //jwt过期
+                {
+                    if (DoRelogin())
+                    {
+                        return HttpPostFormUrlParamWithInfo(app, url, out ce, parmList); //产生新的jwt，方法重新执行
+                    }
+                    else ce = new CustomException(statusCode, "at " + urlcomp, "");
+                }
                 else //其它错误
                 {
-                    ce = new CustomException(statusCode, "at " + url, "");
+                    ce = new CustomException(statusCode, "at " + urlcomp, "");
                 }
             }
             catch (Exception e)
             {
-                ce = new CustomException("服务异常", e.Message + " [" + url + "]", e.StackTrace);
+                ce = new CustomException("服务异常", e.Message + " [" + urlcomp + "]", e.StackTrace);
                 RemoveHeader();
                 return String.Empty;
             }
@@ -348,12 +316,12 @@ namespace His6.Base
             var content = new StringContent(json);
             var handler = new HttpClientHandler() { AutomaticDecompression = DecompressionMethods.GZip };
 
-            url = GetUrl(app, url);
+            String urlcomp = GetUrl(app, url);
             //创建HttpClient（注意传入HttpClientHandler）
             using (var http = new HttpClient(handler))
             {
                 SetHeader();
-                var response = http.PostAsync(url, content).Result; //await异步等待回应
+                var response = http.PostAsync(urlcomp, content).Result; //await异步等待回应
                                                                     //await异步读取最后的JSON（注意此时gzip已经被自动解压缩了，因为上面的AutomaticDecompression = DecompressionMethods.GZip）
                 String statusCode = response.StatusCode.ToString();
                 result = response.Content.ReadAsStringAsync().Result;//result就是返回的结果。
@@ -368,9 +336,17 @@ namespace His6.Base
                     CustomExceptionInfo info = JsonConvert.DeserializeObject<CustomExceptionInfo>(result);
                     ce = new CustomException(info);
                 }
+                else if (statusCode.Equals("PreconditionFailed")) //jwt过期
+                {
+                    if (DoRelogin())
+                    {
+                        return HttpPostGZipWithInfo(app, url, out ce, json); //产生新的jwt，方法重新执行
+                    }
+                    else ce = new CustomException(statusCode, "at " + urlcomp, "");
+                }
                 else //其它错误
                 {
-                    ce = new CustomException(statusCode, "at " + url, "");
+                    ce = new CustomException(statusCode, "at " + urlcomp, "");
                 }
                 RemoveHeader();
             }
@@ -433,40 +409,6 @@ namespace His6.Base
         #region GET 数据获取（以HttpDataGeneric<T>方式返回）
 
         /// <summary>
-        ///  restful路径方式GET 字符串数据获取（同步），同时获取状态码，按状态码识别是否成功。
-        /// </summary>
-        /// <param name="url">地址</param>
-        /// <param name="ErrorInfo">错误内容</param>
-        /// <param name="parms">参数值数组</param>
-        /// <returns></returns>
-        //public static HttpDataGeneric<String> PathGetStringByHD(String app, String url, params String[] parms)
-        //{
-        //    CustomException ei = null;
-        //    String data = PathGetStringWithInfo(app, url, out ei, parms);
-        //    HttpDataGeneric<String> rst = new HttpDataGeneric<string>();
-        //    rst.DataEntity = data;
-        //    rst.ExceptionInfo = ei;
-        //    return rst;
-        //}
-
-        /// <summary>
-        ///  restful路径方式 GET 实体数据获取（同步）,出错抛异常
-        /// </summary>
-        /// <param name="url">地址</param>
-        /// <param name="parms">参数值数组</param>
-        /// <returns></returns>
-        //public static HttpDataGeneric<T> PathGetByHD<T>(String app, String url, params String[] parms)
-        //{
-        //    CustomException ei = null;
-        //    T data = PathGetWithInfo<T>(app, url, out ei, parms);
-        //    HttpDataGeneric<T> rst = new HttpDataGeneric<T>();
-        //    rst.DataEntity = data;
-        //    rst.ExceptionInfo = ei;
-        //    return rst;
-        //}
-
-
-        /// <summary>
         ///  GET 字符串数据获取（同步），同时获取状态码，按状态码识别是否成功。
         /// </summary>
         /// <param name="url">地址</param>
@@ -477,15 +419,15 @@ namespace His6.Base
         {
             String result = String.Empty;
             CustomException exInfo = null;
-            url = GetUrl(app, url);
+            String urlcomp = GetUrl(app, url);
             if (parmList != null && parmList.Count > 0)
             {
-                url = AppendUrlWithParameter(url, parmList);
+                urlcomp = AppendUrlWithParameter(urlcomp, parmList);
             }
             try
             {
                 SetHeader();
-                HttpResponseMessage response = _HttpClient.GetAsync(url).Result;
+                HttpResponseMessage response = _HttpClient.GetAsync(urlcomp).Result;
                 String statusCode = response.StatusCode.ToString();
                 result = response.Content.ReadAsStringAsync().Result;
                 if (response.IsSuccessStatusCode)
@@ -497,14 +439,22 @@ namespace His6.Base
                 {
                     exInfo = JsonConvert.DeserializeObject<CustomException>(result);
                 }
+                else if (statusCode.Equals("PreconditionFailed")) //jwt过期
+                {
+                    if (DoRelogin())
+                    {
+                        return GetStringByHD(app, url, parmList); //产生新的jwt，方法重新执行
+                    }
+                    exInfo = new CustomException(statusCode, "at " + urlcomp, "");
+                }
                 else //其它错误
                 {
-                    exInfo = new CustomException(statusCode, "at " + url, "");
+                    exInfo = new CustomException(statusCode, "at " + urlcomp, "");
                 }
             }
             catch (Exception e)
             {
-                exInfo = new CustomException("服务异常", e.Message + " [" + url + "]", e.StackTrace);
+                exInfo = new CustomException("服务异常", e.Message + " [" + urlcomp + "]", e.StackTrace);
                 RemoveHeader();
             }
             RemoveHeader();
@@ -609,10 +559,10 @@ namespace His6.Base
         /// 每次请求生成随机id  格式:32位guid
         /// </summary>
         /// <returns></returns>
-        private static string GetRequestId()
-        {
-            return Guid.NewGuid().ToStringN();
-        }
+        //private static string GetRequestId()
+        //{
+        //    return Guid.NewGuid().ToStringN();
+        //}
 
         private static void RemoveHeader()
         {
@@ -640,6 +590,25 @@ namespace His6.Base
         }
 
         #endregion
+
+        private static bool DoRelogin()
+        {
+            EnvInfo.JwtToken = null; //jwt清空重置
+            FrmRelogin frm_relogin = new FrmRelogin();
+            frm_relogin.Text = "登录超时";
+            DisplayHelper.Hide();
+            DialogResult dr = frm_relogin.ShowDialog();
+            if (dr == DialogResult.OK)
+            {                
+                DisplayHelper.Show();
+                return true;
+            }
+            if (dr == DialogResult.Abort)
+            {
+                Application.Exit();
+            }
+            return false;
+        }
 
     }
         

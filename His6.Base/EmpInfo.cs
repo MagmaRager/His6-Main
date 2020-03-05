@@ -352,6 +352,7 @@ namespace His6.Base
             //        3. 获取普通角色、行为角色
 
             List<KeyValuePair<string, string>> parms = new List<KeyValuePair<string, string>>();
+            parms.Add(new KeyValuePair<string, string>("branchCode", EnvInfo.BranchCode));
             parms.Add(new KeyValuePair<string, string>("empCode", EmpInfo.Code));
             parms.Add(new KeyValuePair<string, string>("password", DataCryptoHelper.MD5EncryptString(password)));
             parms.Add(new KeyValuePair<string, string>("ip", EnvInfo.ComputerIp));

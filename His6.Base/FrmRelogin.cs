@@ -22,7 +22,7 @@ namespace His6.Base
             this.ucLogin1.InitForRelogin();
         }
         
-        private void btnRelogin_Click(object sender, EventArgs e)
+        private void btnRelogin_Click(object sender, EventArgs e) 
         {
             try
             {
@@ -47,7 +47,7 @@ namespace His6.Base
                 {
                     LogHelper.Warn(this, "由于登录错误次数过多，为了您的安全系统将暂时关闭！");
                     MessageBox.Show("由于登录错误次数过多，为了您的安全系统将暂时关闭！", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    base.Close();
+                    this.DialogResult = DialogResult.Abort;
                 }
             }
         }
