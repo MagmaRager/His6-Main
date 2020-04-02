@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "His6.SysSetup", "His6.SysSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "His6.Resource", "His6.Resource\His6.Resource.csproj", "{6E6B53D0-0CC4-48CD-82A5-3F697FC7F961}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "His6.Update", "His6.Update\His6.Update.csproj", "{F19C6449-6909-4174-B5B6-48F86CE640F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{6E6B53D0-0CC4-48CD-82A5-3F697FC7F961}.Release|x64.Build.0 = Release|Any CPU
 		{6E6B53D0-0CC4-48CD-82A5-3F697FC7F961}.Release|x86.ActiveCfg = Release|Any CPU
 		{6E6B53D0-0CC4-48CD-82A5-3F697FC7F961}.Release|x86.Build.0 = Release|Any CPU
+		{F19C6449-6909-4174-B5B6-48F86CE640F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F19C6449-6909-4174-B5B6-48F86CE640F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F19C6449-6909-4174-B5B6-48F86CE640F5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F19C6449-6909-4174-B5B6-48F86CE640F5}.Debug|x64.Build.0 = Debug|Any CPU
+		{F19C6449-6909-4174-B5B6-48F86CE640F5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F19C6449-6909-4174-B5B6-48F86CE640F5}.Debug|x86.Build.0 = Debug|Any CPU
+		{F19C6449-6909-4174-B5B6-48F86CE640F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F19C6449-6909-4174-B5B6-48F86CE640F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F19C6449-6909-4174-B5B6-48F86CE640F5}.Release|x64.ActiveCfg = Release|Any CPU
+		{F19C6449-6909-4174-B5B6-48F86CE640F5}.Release|x64.Build.0 = Release|Any CPU
+		{F19C6449-6909-4174-B5B6-48F86CE640F5}.Release|x86.ActiveCfg = Release|Any CPU
+		{F19C6449-6909-4174-B5B6-48F86CE640F5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

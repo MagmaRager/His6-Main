@@ -1,15 +1,13 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-
-using EasyNetQ;
 
 namespace His6.Base
 {
     /// <summary>
     /// 文 件 名：远程信息处理类
-    /// 功能描述：通过RabbitMQ消息服务实现信息的传送，
+    /// 功能描述：通过消息服务实现信息的传送，
     /// 创建标识：han
     ///
     /// 修改标识：
@@ -20,11 +18,13 @@ namespace His6.Base
     {
         #region 变量
 
-        private static bool _Cancel = false;                        //  是否取消连接消息服务
-        private static bool _SubscribeFlag = false;                 //  是否已经订阅
-        private static string _ConnString = string.Empty;           //  消息服务连接串
-        private static IBus _Bus = null;                            //  消息服务对象
-        private static string _SubscribeId = EnvInfo.ComputerIp + " ||" + EnvInfo.SystemCode;    //  订阅ID
+        private static bool _Connected = false;                        //  是否连接消息服务
+        //private static bool _SubscribeFlag = false;                 //  是否已经订阅
+        //private static string _ConnString = string.Empty;           //  消息服务连接串
+        //private static IBus _Bus = null;                            //  消息服务对象
+        //private static string _SubscribeId = EnvInfo.ComputerIp + " ||" + EnvInfo.SystemCode;    //  订阅ID
+        
+        private static IRemoteInfo remoteInfo;
         private static Dictionary<String, List<RemoteInfoReceiver>> _ActionDict;    //  信息代码及远程信息功能对象列表
 
         #endregion
@@ -38,7 +38,7 @@ namespace His6.Base
         {
             get
             {
-                return _Bus.IsConnected;
+                return _Connected;
             }
         }
 
@@ -77,76 +77,21 @@ namespace His6.Base
         /// </summary>
         static RemoteInfoHelper()
         {
+            String mqUrl = System.Configuration.ConfigurationManager.AppSettings.Get("MQUrl");
             _ActionDict = new Dictionary<string, List<RemoteInfoReceiver>>();
-            // TODO： 获取信息服务URI
-            _ConnString = "";//"host=192.168.0.109:5672;username=h13584;password=123456";
 
-
-            if (_ConnString == null || _ConnString == string.Empty)
+            if (mqUrl.Substring(0, 4).ToUpper().Equals("NATS"))
             {
-                LogHelper.Error(typeof(RemoteInfoHelper).FullName, "RabbitMQ 服务地址没有配置");
-                _Cancel = true;
-                return;
+                remoteInfo = new RemoteInfoNATS { };
             }
-
-            //  初始化对象
-            _Bus = RabbitHutch.CreateBus(_ConnString);
-            _Bus.Dispose();
-            
-        }
-
-        /// <summary>
-        ///  连接服务
-        /// </summary>
-         static void Connection()
-        {
-            if (_Cancel)
+            else
             {
-                return;
+                //remoteInfo = new RemoteInfoMQ { };
             }
-            try
+            if(remoteInfo.Init(mqUrl, CallBack))
             {
-                _Bus = RabbitHutch.CreateBus(_ConnString);
+                _Connected = true;
             }
-            catch (Exception ex)
-            {
-                string msg = "RabbitMQ 服务连接出错：" + ex.Message;
-                msg += "\r\n异常跟踪:" + ex.StackTrace;
-                if (ex.InnerException != null)
-                {
-                    msg += "\r\n异常消息：" + ex.InnerException.Message + "\r\n异常错误:" + ex.InnerException.StackTrace;
-                }
-                LogHelper.Error(typeof(RemoteInfoHelper).FullName, msg);
-            }
-        }
-
-        /// <summary>
-        ///  检测消息服务是否连接
-        /// </summary>
-        /// <returns></returns>
-        static bool CheckConnect()
-        {
-            if (!_Bus.IsConnected)
-            {
-                if (_Cancel)
-                {
-                    return false;
-                }
-                else
-                {
-                    Connection();
-                }
-            }
-
-            if (!_Bus.IsConnected)
-            {
-                if(MessageHelper.ShowYesNoAndQuestion("消息服务连接不成功，是否关闭？") == System.Windows.Forms.DialogResult.Yes)
-                {
-                    _Cancel = true;
-                }
-            }
-
-            return _Bus.IsConnected;
         }
 
         /// <summary>
@@ -156,7 +101,7 @@ namespace His6.Base
         /// <param name="infoCodeList">需要注册的信息列表</param>
         /// <returns></returns>
         public static bool RegisterInfo(RemoteInfoReceiver infoAction, List<String> infoCodeList)
-        {
+        {           
             if (infoAction == null || infoCodeList.Count == 0)
             {
                 LogHelper.Warn(typeof(RemoteInfoHelper).FullName, "注册时对象不能空或没有接受信息代码");
@@ -175,18 +120,15 @@ namespace His6.Base
                 if (!lst.Exists(o => o == infoAction))
                 {
                     lst.Add(infoAction);
+                    if (_Connected)
+                    {
+                        remoteInfo.Subscribe(code);
+                    }
                 };
             }
             LogHelper.Info(typeof(RemoteInfoHelper).FullName, infoAction.GetType().FullName + "注册远程信息,代码：" + string.Join(",", infoCodeList.ToArray()));
-
-            if (!_SubscribeFlag)        //  没有订阅开启订阅
-            {
-                return Subscribe();
-            }
-            else
-            {
-                return true;
-            }
+            
+            return true;
         }
 
         /// <summary>
@@ -198,7 +140,7 @@ namespace His6.Base
         {
             if (infoAction == null)
             {
-                return ;
+                return;
             }
 
             //  清理字典
@@ -214,42 +156,35 @@ namespace His6.Base
                 if (item.Count == 0)
                 {
                     _ActionDict.Remove(key);
+                    if (_Connected)     // 重新订阅
+                    {
+                        remoteInfo.Unsubscribe(key);
+                    }
                 }
             }
             LogHelper.Info(typeof(RemoteInfoHelper).FullName, infoAction.GetType().FullName + "撤消远程信息");
-
-
-            if (_ActionDict.Count == 0 && _Bus != null)     //  没有订阅的消息自动关闭
-            {
-                _Bus.Dispose();
-                _SubscribeFlag = false;
-            }
-            return ;
+            
+            
+            return;
         }
 
         /// <summary>
         ///  消息接收后处理
         /// </summary>
         /// <param name="md"></param>
-        private static void CallBack(MessageData md)
+        private static void CallBack(string msg)
         {
-            //  取发送者信息
-            StringBuilder sb = new StringBuilder();
-            sb.Append("接受到消息： \r\n    用户Id：");
-            sb.Append(md.SendEmpId);
-            sb.Append("系统代码：");
-            sb.Append(md.SendSystemCode);
-            sb.Append("对象名称：");
-            sb.Append(md.SendObject);
-            sb.Append("IP：");
-            sb.Append(md.SendIP);
-            sb.Append("\r\n    信息代码：");
-            sb.AppendLine(md.Code);
-            sb.Append("    信息内容：");
-            sb.AppendLine(md.Info);
-
-            LogHelper.Info(typeof(RemoteInfoHelper).FullName, sb.ToString());
-            
+            MessageData md = new MessageData();
+            LogHelper.Info(typeof(RemoteInfoHelper).FullName, "接收消息：" + msg);
+            try
+            {
+                md = StringHelper.DeserializeObject<MessageData>(msg);
+            }
+            catch(Exception ex)
+            {
+                LogHelper.Error(typeof(RemoteInfoHelper).FullName, ex.Message);
+            }            
+                       
             //  接受对应信息代码的功能执行回调
             List<RemoteInfoReceiver> actions = _ActionDict[md.Code];
             if (actions != null)
@@ -266,15 +201,15 @@ namespace His6.Base
         ///  消息订阅
         /// </summary>
         /// <returns></returns>
-        private static bool Subscribe()
+        public static bool Subscribe(string topic)
         {
             bool succeed = false;
             try
             {
-                if (CheckConnect())
+                if (remoteInfo.CheckConnect())
                 {
-                    _Bus.Subscribe<MessageData>(_SubscribeId, msg => CallBack(msg as MessageData));
-                    _SubscribeFlag = true;
+                    remoteInfo.Subscribe(topic);
+                    //_Bus.Subscribe<MessageData>(_SubscribeId, msg => CallBack(msg as MessageData));
                     succeed = true;
                 }
             }
@@ -285,6 +220,13 @@ namespace His6.Base
             return succeed;
         }
 
+        public static void Close()
+        {
+            if (_Connected)
+            {
+                remoteInfo.Close();
+            }
+        }
 
         /// <summary>
         ///  发送信息
@@ -293,7 +235,7 @@ namespace His6.Base
         /// <param name="info">内容</param>
         /// <param name="sendObject">发送对象</param>
         /// <returns></returns>
-        public static bool SendInfo(string infoCode, string info, string sendObject = "" )
+        public static bool SendInfo(string infoCode, string info)
         {
             bool succeed = false;
             try
@@ -302,17 +244,13 @@ namespace His6.Base
                 md.Code = infoCode;
                 md.Info = info;
                 md.SendIP = EnvInfo.ComputerIp;
-                md.SendSystemCode = EnvInfo.SystemCode;
                 md.SendEmpId = EmpInfo.Id;
-                md.SendObject = sendObject;
 
-                if (CheckConnect())
+                if (remoteInfo.CheckConnect())
                 {
-                    _Bus.Publish<MessageData>(md);
-                    if (!_SubscribeFlag)
-                    {
-                        _Bus.Dispose();
-                    }
+                    String infoStr = StringHelper.SerializeObject<MessageData>(md);
+                    remoteInfo.Publish(infoCode, infoStr);
+                    
                 }
                 succeed = true;
                 LogHelper.Info(typeof(RemoteInfoHelper).FullName, "消息服务发送成功，信息代码：" + infoCode + " 信息内容：" + info);
@@ -337,16 +275,10 @@ namespace His6.Base
             //  信息内容
             public string Info { set; get; }
 
-            //  发送者IP
-            public string SendIP { set; get; }
+            //  发送者ip
+            public string SendIP { set; get; }            
 
-            //  发送者系统代码
-            public string SendSystemCode { set; get; }
-
-            //  发送者对象名称
-            public string SendObject { set; get; }
-
-            //  发送者员工ID
+            //  发送者员工id
             public int SendEmpId { set; get; }
         }
     }

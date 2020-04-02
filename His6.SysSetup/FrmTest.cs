@@ -62,7 +62,7 @@ namespace His6.SysSetup
             string code = textEdit1.Text;
             string info = textEdit2.Text;
 
-            RemoteInfoHelper.SendInfo(code, info, this.GetType().FullName);
+            RemoteInfoHelper.SendInfo(code, info);
         }
 
         private void FrmTest_FormClosed(object sender, FormClosedEventArgs e)

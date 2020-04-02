@@ -1,8 +1,9 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-
+using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Drawing;
@@ -26,7 +27,6 @@ namespace His6.Main
         [STAThread]
         static void Main()
         {
-           
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("zh-Hans");
             //换肤
             BonusSkins.Register();
@@ -47,7 +47,7 @@ namespace His6.Main
             Application.ThreadException += new ThreadExceptionEventHandler(AppThreadException);
 
             DisplayHelper.ShowWithLog(typeof(Program).FullName, "初始化", "正在初始化系统，请稍后...");
-            
+
             //  判断系统是否已经运行, 
             CheckRunning();
 
@@ -99,11 +99,11 @@ namespace His6.Main
                     //}
                     //else
                     //{
-                        WindowsFormsSettings.DefaultFont = new Font(SystemFonts.DefaultFont.Name, SystemFonts.DefaultFont.Size);
+                    WindowsFormsSettings.DefaultFont = new Font(SystemFonts.DefaultFont.Name, SystemFonts.DefaultFont.Size);
                     //}
 
                     DisplayHelper.ShowWithLog(typeof(Program).FullName, "初始化", "正在创建主窗口...");
-                    
+
                     FrmMainRibbon frm = new FrmMainRibbon();
                     frm.Title = title;
                     frm.Init();
@@ -201,9 +201,9 @@ namespace His6.Main
             return dict;
         }
 
-        
+
 
     }
 
-    
+
 }

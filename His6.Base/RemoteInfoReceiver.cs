@@ -29,11 +29,10 @@ namespace His6.Base
 
     public class RemoteInfoReceiver : IDisposable
     {
-
         //  回调函数
-        private OnCallbackInfo callbackInfo ;
+        private OnCallbackInfo callbackInfo;
         //  接受的信息代码列表
-        private List<String> infoCodeList ;
+        private List<String> infoCodeList;
 
         /// <summary>
         ///  构造函数
@@ -48,7 +47,7 @@ namespace His6.Base
             //  注册信息码
             if (infoCodeList.Count > 0)
             {
-                RemoteInfoHelper.RegisterInfo(this, infoCodeList);
+                RemoteInfoHelper.RegisterInfo(this, infoCodeList);                
             }
         }
 
@@ -63,7 +62,6 @@ namespace His6.Base
                 RemoteInfoHelper.RevokeInfo(this);
                 infoCodeList = null;
             }
-
         }
 
         /// <summary>
@@ -85,7 +83,6 @@ namespace His6.Base
         {
             callbackInfo(infoCode, infoBody);
         }
-
     }
 
     /// <summary>

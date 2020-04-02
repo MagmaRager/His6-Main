@@ -183,10 +183,11 @@ namespace His6.Main
             //初始化外部信息对象, 危机值、关注项由通知
             List<string> infoRemoteCodeList = new List<string>();
             //  TODO:  ？？？ 
-            infoRemoteCodeList.Add("");             //  危机值信息
-            infoRemoteCodeList.Add("");             //  关注项信息
+            infoRemoteCodeList.Add("foo1");             //  危机值信息
+            infoRemoteCodeList.Add("foo2");             //  关注项信息
 
             infoRemoteAction = new RemoteInfoReceiver(infoRemoteCodeList, SynCallbackInfo);
+            //RemoteInfoHelper.Subscribe("foo1,foo2");
 
             //初始化内部信息对象
             List<string> infoLocalCodeList = new List<string>();
@@ -746,10 +747,11 @@ namespace His6.Main
                     FrmMenuDefault frmdfm = new FrmMenuDefault();
                     frmdfm.ShowDialog();
                     break;
-                case "SQLH":
-                    FrmSqlMonitor frmsh = new FrmSqlMonitor();
-                    frmsh.MdiParent = this;
-                    frmsh.Show();
+                case "SQLM":
+                    FrmSQLMonitorWithMsg frmsm = new FrmSQLMonitorWithMsg();
+                    frmsm.MdiParent = this;
+                    frmsm.Init();
+                    frmsm.Show();
                     break;
                 case "PASSWORD":
                     FrmPassword frmpw = new FrmPassword();
@@ -915,6 +917,8 @@ namespace His6.Main
 
                 LogHelper.Info(this, "退出系统 --- 关闭内部信息接口");
                 infoLocalAction.Close();
+
+                RemoteInfoHelper.Close();   //关闭消息服务连接
 
                 EmpInfo.Logout();
                 timer1.Stop();

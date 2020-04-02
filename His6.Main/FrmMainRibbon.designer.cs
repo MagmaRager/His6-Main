@@ -30,24 +30,23 @@ namespace His6.Main
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMainRibbon));
-            DevExpress.Utils.SuperToolTip superToolTip17 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipItem toolTipItem17 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.SuperToolTip superToolTip18 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipItem toolTipItem18 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.SuperToolTip superToolTip19 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipItem toolTipItem19 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.SuperToolTip superToolTip20 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipItem toolTipItem20 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.SuperToolTip superToolTip21 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipItem toolTipItem21 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.SuperToolTip superToolTip22 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipItem toolTipItem22 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.SuperToolTip superToolTip23 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipItem toolTipItem23 = new DevExpress.Utils.ToolTipItem();
-            DevExpress.Utils.SuperToolTip superToolTip24 = new DevExpress.Utils.SuperToolTip();
-            DevExpress.Utils.ToolTipItem toolTipItem24 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip2 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipItem toolTipItem2 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip3 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipItem toolTipItem3 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip4 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipItem toolTipItem4 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip5 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipItem toolTipItem5 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip6 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipItem toolTipItem6 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip7 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipItem toolTipItem7 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.SuperToolTip superToolTip8 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipItem toolTipItem8 = new DevExpress.Utils.ToolTipItem();
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.bbiHelp = new DevExpress.XtraBars.BarButtonItem();
             this.bbiChange = new DevExpress.XtraBars.BarButtonItem();
@@ -65,6 +64,7 @@ namespace His6.Main
             this.bsiOtherTool = new DevExpress.XtraBars.BarSubItem();
             this.bbiDefMenu = new DevExpress.XtraBars.BarButtonItem();
             this.bbiSqlHeader = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.bsiLog = new DevExpress.XtraBars.BarSubItem();
             this.bciLogNone = new DevExpress.XtraBars.BarCheckItem();
             this.bciLogError = new DevExpress.XtraBars.BarCheckItem();
@@ -87,6 +87,8 @@ namespace His6.Main
             this.barStaticItem4 = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItem6 = new DevExpress.XtraBars.BarStaticItem();
             this.barStaticItem7 = new DevExpress.XtraBars.BarStaticItem();
+            this.LinkMacAddress = new DevExpress.XtraBars.BarLinkContainerItem();
+            this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
             this.rbPageTools = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.rbPageGroupTools = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rbPageGroupSkin = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -101,9 +103,7 @@ namespace His6.Main
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.ribbonPageGroup10 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.customTabbedMdiManager1 = new His6.Base.Control.CustomTabbedMdiManager(this.components);
-            this.LinkMacAddress = new DevExpress.XtraBars.BarLinkContainerItem();
-            this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
+            this.customTabbedMdiManager1 = new His6.Base.Control.CustomTabbedMdiManager();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTextEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.riInputCode)).BeginInit();
@@ -160,9 +160,11 @@ namespace His6.Main
             this.barStaticItem6,
             this.barStaticItem7,
             this.LinkMacAddress,
-            this.barHeaderItem1});
+            this.barHeaderItem1,
+            this.barButtonItem1});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 27;
+            this.ribbon.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ribbon.MaxItemId = 28;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.rbPageTools});
@@ -175,7 +177,7 @@ namespace His6.Main
             this.repositoryItemCheckEdit1,
             this.repositoryItemTextEdit1});
             this.ribbon.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
-            this.ribbon.Size = new System.Drawing.Size(1187, 128);
+            this.ribbon.Size = new System.Drawing.Size(1696, 188);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             this.ribbon.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Hidden;
             // 
@@ -187,9 +189,9 @@ namespace His6.Main
             this.bbiHelp.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("bbiHelp.ImageOptions.LargeImage")));
             this.bbiHelp.ImageOptions.LargeImageIndex = 2;
             this.bbiHelp.Name = "bbiHelp";
-            toolTipItem17.Text = "系统使用说明";
-            superToolTip17.Items.Add(toolTipItem17);
-            this.bbiHelp.SuperTip = superToolTip17;
+            toolTipItem1.Text = "系统使用说明";
+            superToolTip1.Items.Add(toolTipItem1);
+            this.bbiHelp.SuperTip = superToolTip1;
             this.bbiHelp.Tag = "HELP";
             this.bbiHelp.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbi_ItemClick);
             // 
@@ -201,9 +203,9 @@ namespace His6.Main
             this.bbiChange.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("bbiChange.ImageOptions.LargeImage")));
             this.bbiChange.ImageOptions.LargeImageIndex = 5;
             this.bbiChange.Name = "bbiChange";
-            toolTipItem18.Text = "换一个人员登录";
-            superToolTip18.Items.Add(toolTipItem18);
-            this.bbiChange.SuperTip = superToolTip18;
+            toolTipItem2.Text = "换一个人员登录";
+            superToolTip2.Items.Add(toolTipItem2);
+            this.bbiChange.SuperTip = superToolTip2;
             this.bbiChange.Tag = "RELOGIN";
             this.bbiChange.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbi_ItemClick);
             // 
@@ -211,7 +213,7 @@ namespace His6.Main
             // 
             this.bsiUser.Caption = "单位名称";
             this.bsiUser.Id = 5;
-            this.bsiUser.ItemAppearance.Normal.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bsiUser.ItemAppearance.Normal.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bsiUser.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Blue;
             this.bsiUser.ItemAppearance.Normal.Options.UseFont = true;
             this.bsiUser.ItemAppearance.Normal.Options.UseForeColor = true;
@@ -225,9 +227,9 @@ namespace His6.Main
             this.bbiPassword.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("bbiPassword.ImageOptions.LargeImage")));
             this.bbiPassword.ImageOptions.LargeImageIndex = 4;
             this.bbiPassword.Name = "bbiPassword";
-            toolTipItem19.Text = "修改操作员输入口令";
-            superToolTip19.Items.Add(toolTipItem19);
-            this.bbiPassword.SuperTip = superToolTip19;
+            toolTipItem3.Text = "修改操作员输入口令";
+            superToolTip3.Items.Add(toolTipItem3);
+            this.bbiPassword.SuperTip = superToolTip3;
             this.bbiPassword.Tag = "PASSWORD";
             this.bbiPassword.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbi_ItemClick);
             // 
@@ -239,9 +241,9 @@ namespace His6.Main
             this.bbiAbout.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("bbiAbout.ImageOptions.LargeImage")));
             this.bbiAbout.ImageOptions.LargeImageIndex = 3;
             this.bbiAbout.Name = "bbiAbout";
-            toolTipItem20.Text = "系统版本及模块信息";
-            superToolTip20.Items.Add(toolTipItem20);
-            this.bbiAbout.SuperTip = superToolTip20;
+            toolTipItem4.Text = "系统版本及模块信息";
+            superToolTip4.Items.Add(toolTipItem4);
+            this.bbiAbout.SuperTip = superToolTip4;
             this.bbiAbout.Tag = "ABOUT";
             this.bbiAbout.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbi_ItemClick);
             // 
@@ -255,9 +257,9 @@ namespace His6.Main
             this.bbiClose.Name = "bbiClose";
             this.bbiClose.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
             | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
-            toolTipItem21.Text = "退出并关闭系统";
-            superToolTip21.Items.Add(toolTipItem21);
-            this.bbiClose.SuperTip = superToolTip21;
+            toolTipItem5.Text = "退出并关闭系统";
+            superToolTip5.Items.Add(toolTipItem5);
+            this.bbiClose.SuperTip = superToolTip5;
             this.bbiClose.Tag = "EXIT";
             this.bbiClose.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbi_ItemClick);
             // 
@@ -268,9 +270,9 @@ namespace His6.Main
             this.bbiCal.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("bbiCal.ImageOptions.Image")));
             this.bbiCal.ImageOptions.LargeImageIndex = 8;
             this.bbiCal.Name = "bbiCal";
-            toolTipItem22.Text = "调用计算器";
-            superToolTip22.Items.Add(toolTipItem22);
-            this.bbiCal.SuperTip = superToolTip22;
+            toolTipItem6.Text = "调用计算器";
+            superToolTip6.Items.Add(toolTipItem6);
+            this.bbiCal.SuperTip = superToolTip6;
             this.bbiCal.Tag = "CALC";
             this.bbiCal.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbi_ItemClick);
             // 
@@ -282,9 +284,9 @@ namespace His6.Main
             this.bciIsMin.Id = 20;
             this.bciIsMin.ImageOptions.LargeImageIndex = 1;
             this.bciIsMin.Name = "bciIsMin";
-            toolTipItem23.Text = "工具条带最小化开关";
-            superToolTip23.Items.Add(toolTipItem23);
-            this.bciIsMin.SuperTip = superToolTip23;
+            toolTipItem7.Text = "工具条带最小化开关";
+            superToolTip7.Items.Add(toolTipItem7);
+            this.bciIsMin.SuperTip = superToolTip7;
             this.bciIsMin.Tag = "MINRIBBON";
             this.bciIsMin.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbi_ItemClick);
             // 
@@ -292,7 +294,7 @@ namespace His6.Main
             // 
             this.bsiOper.Caption = "操作员";
             this.bsiOper.Id = 22;
-            this.bsiOper.ItemAppearance.Normal.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bsiOper.ItemAppearance.Normal.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bsiOper.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Blue;
             this.bsiOper.ItemAppearance.Normal.Options.UseFont = true;
             this.bsiOper.ItemAppearance.Normal.Options.UseForeColor = true;
@@ -302,7 +304,7 @@ namespace His6.Main
             // 
             this.barStaticItem2.Caption = "  操作人员：";
             this.barStaticItem2.Id = 28;
-            this.barStaticItem2.ItemAppearance.Normal.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.barStaticItem2.ItemAppearance.Normal.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.barStaticItem2.ItemAppearance.Normal.Options.UseFont = true;
             this.barStaticItem2.Name = "barStaticItem2";
             // 
@@ -310,7 +312,7 @@ namespace His6.Main
             // 
             this.barStaticItem3.Caption = "  工作点：";
             this.barStaticItem3.Id = 29;
-            this.barStaticItem3.ItemAppearance.Normal.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.barStaticItem3.ItemAppearance.Normal.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.barStaticItem3.ItemAppearance.Normal.Options.UseFont = true;
             this.barStaticItem3.Name = "barStaticItem3";
             // 
@@ -322,9 +324,9 @@ namespace His6.Main
             this.bbiCloseChild.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("bbiCloseChild.ImageOptions.LargeImage")));
             this.bbiCloseChild.ImageOptions.LargeImageIndex = 7;
             this.bbiCloseChild.Name = "bbiCloseChild";
-            toolTipItem24.Text = "关闭全部打开的子窗体";
-            superToolTip24.Items.Add(toolTipItem24);
-            this.bbiCloseChild.SuperTip = superToolTip24;
+            toolTipItem8.Text = "关闭全部打开的子窗体";
+            superToolTip8.Items.Add(toolTipItem8);
+            this.bbiCloseChild.SuperTip = superToolTip8;
             this.bbiCloseChild.Tag = "CLOSECHILD";
             this.bbiCloseChild.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbi_ItemClick);
             // 
@@ -343,7 +345,7 @@ namespace His6.Main
             this.bsiOtherTool.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.bbiCal, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(this.bbiDefMenu),
-            new DevExpress.XtraBars.LinkPersistInfo(this.bbiSqlHeader),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem1),
             new DevExpress.XtraBars.LinkPersistInfo(this.bsiLog)});
             this.bsiOtherTool.Name = "bsiOtherTool";
             // 
@@ -362,6 +364,14 @@ namespace His6.Main
             this.bbiSqlHeader.Name = "bbiSqlHeader";
             this.bbiSqlHeader.Tag = "SQLH";
             this.bbiSqlHeader.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbi_ItemClick);
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "SQL监视实时消息";
+            this.barButtonItem1.Id = 27;
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.Tag = "SQLM";
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbi_ItemClick);
             // 
             // bsiLog
             // 
@@ -468,7 +478,7 @@ namespace His6.Main
             // 
             this.barStaticItem1.Caption = "  本机IP：";
             this.barStaticItem1.Id = 68;
-            this.barStaticItem1.ItemAppearance.Normal.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.barStaticItem1.ItemAppearance.Normal.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.barStaticItem1.ItemAppearance.Normal.Options.UseFont = true;
             this.barStaticItem1.Name = "barStaticItem1";
             // 
@@ -476,7 +486,7 @@ namespace His6.Main
             // 
             this.bsiIP.Caption = "0.0.0.0";
             this.bsiIP.Id = 69;
-            this.bsiIP.ItemAppearance.Normal.Font = new System.Drawing.Font("SimSun", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bsiIP.ItemAppearance.Normal.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bsiIP.ItemAppearance.Normal.ForeColor = System.Drawing.Color.Black;
             this.bsiIP.ItemAppearance.Normal.Options.UseFont = true;
             this.bsiIP.ItemAppearance.Normal.Options.UseForeColor = true;
@@ -533,6 +543,18 @@ namespace His6.Main
             this.barStaticItem7.Caption = "barStaticItem7";
             this.barStaticItem7.Id = 23;
             this.barStaticItem7.Name = "barStaticItem7";
+            // 
+            // LinkMacAddress
+            // 
+            this.LinkMacAddress.AllowRightClickInMenu = false;
+            this.LinkMacAddress.Id = 25;
+            this.LinkMacAddress.Name = "LinkMacAddress";
+            // 
+            // barHeaderItem1
+            // 
+            this.barHeaderItem1.Caption = "barHeaderItem1";
+            this.barHeaderItem1.Id = 26;
+            this.barHeaderItem1.Name = "barHeaderItem1";
             // 
             // rbPageTools
             // 
@@ -629,10 +651,11 @@ namespace His6.Main
             this.ribbonStatusBar.ItemLinks.Add(this.bsiLoadingInfo);
             this.ribbonStatusBar.ItemLinks.Add(this.bsiDataSource);
             this.ribbonStatusBar.ItemLinks.Add(this.barItemServerTimeLable);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 809);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 1064);
+            this.ribbonStatusBar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1187, 31);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(1696, 41);
             // 
             // ribbonPageGroup10
             // 
@@ -652,27 +675,16 @@ namespace His6.Main
             this.customTabbedMdiManager1.MdiParent = this;
             this.customTabbedMdiManager1.MdParBackImage = null;
             // 
-            // LinkMacAddress
-            // 
-            this.LinkMacAddress.AllowRightClickInMenu = false;
-            this.LinkMacAddress.Id = 25;
-            this.LinkMacAddress.Name = "LinkMacAddress";
-            // 
-            // barHeaderItem1
-            // 
-            this.barHeaderItem1.Caption = "barHeaderItem1";
-            this.barHeaderItem1.Id = 26;
-            this.barHeaderItem1.Name = "barHeaderItem1";
-            // 
             // FrmMainRibbon
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1187, 840);
+            this.ClientSize = new System.Drawing.Size(1696, 1105);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "FrmMainRibbon";
             this.Ribbon = this.ribbon;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -751,5 +763,6 @@ namespace His6.Main
         private DevExpress.XtraBars.BarStaticItem barStaticItem7;
         private DevExpress.XtraBars.BarLinkContainerItem LinkMacAddress;
         private DevExpress.XtraBars.BarHeaderItem barHeaderItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
     }
 }

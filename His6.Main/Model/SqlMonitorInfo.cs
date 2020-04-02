@@ -8,37 +8,13 @@ namespace His6.Main
 {
     public class SqlMonitorInfo
     {
-        public String Header { get; set; }
+        public String Node { get; set; }
 
-        public long Time { get; set; }
-
-        public string TimeStr
-        {
-            get
-            {
-                var date = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
-                date = date.AddMilliseconds(Time);
-                return date.ToString();
-            }
-        }
-
+        public String Time { get; set; }
+        
         public String ExecuteSql { get; set; }
 
-        public List<String> Parameters { get; set; }
-
-        public string ParameterList
-        {
-            get
-            {
-                if (Parameters.Count == 0) return "无";
-                String ps = "";
-                foreach(String p in Parameters)
-                {
-                    ps += p + " ※ ";                    
-                }
-                return ps;
-            }
-        }
+        public List<String> Parameters { get; set; }        
 
         public long Duration { get; set; }
     }

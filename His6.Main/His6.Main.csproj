@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+ï»¿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -146,11 +146,11 @@
     <Compile Include="Control\UCLoginDemo.Designer.cs">
       <DependentUpon>UCLoginDemo.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmSqlMonitor.cs">
+    <Compile Include="FrmSQLMonitorWithMsg.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmSqlMonitor.Designer.cs">
-      <DependentUpon>FrmSqlMonitor.cs</DependentUpon>
+    <Compile Include="FrmSQLMonitorWithMsg.Designer.cs">
+      <DependentUpon>FrmSQLMonitorWithMsg.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\DataMenu.cs" />
     <Compile Include="FrmAbout.cs">
@@ -205,10 +205,10 @@
     <EmbeddedResource Include="FrmPassword.resx">
       <DependentUpon>FrmPassword.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmSqlMonitor.resx">
-      <DependentUpon>FrmSqlMonitor.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="FrmSQLMonitorWithMsg.resx">
+      <DependentUpon>FrmSQLMonitorWithMsg.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -257,7 +257,7 @@
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.5 %28x86 ºÍ x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 ï¿½ï¿½ x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

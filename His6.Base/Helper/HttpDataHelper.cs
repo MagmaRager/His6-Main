@@ -25,7 +25,10 @@ namespace His6.Base
         /// </summary>
         static Dictionary<String, String> _Urls;
 
+        static String _MonitorNode;
+
         static HttpClient _HttpClient;
+
         static HttpDataHelper()
         {
             _HttpClient = new HttpClient();
@@ -45,6 +48,10 @@ namespace His6.Base
         //    if (ei == null) { return _Urls.Count; }
         //    else throw ei;
         //}
+        public static void SetMonitorNode(string node)
+        {
+            _MonitorNode = node;
+        }
 
         private static void SetServiceUrl()
         {            
@@ -538,10 +545,11 @@ namespace His6.Base
 
         private static void SetHeader()
         {
-            // SQL调试参数
-            if (!String.IsNullOrEmpty(EnvInfo.SqlHeader)) _HttpClient.DefaultRequestHeaders.Add("DEBUG_SQL", EnvInfo.SqlHeader);
+            // SQL监视
+            if (!_MonitorNode.IsNullOrEmpty()) _HttpClient.DefaultRequestHeaders.Add("SQLM", _MonitorNode);
             // JWT  
             if (!String.IsNullOrEmpty(EnvInfo.JwtToken)) _HttpClient.DefaultRequestHeaders.Add("JWT_TOKEN", EnvInfo.JwtToken);
+            
             // IP
             _HttpClient.DefaultRequestHeaders.Add("X-Forwarded-For", EnvInfo.ComputerIp);
 
@@ -567,7 +575,7 @@ namespace His6.Base
         private static void RemoveHeader()
         {
             // SQL调试参数
-            _HttpClient.DefaultRequestHeaders.Remove("DEBUG_SQL");
+            _HttpClient.DefaultRequestHeaders.Remove("SQLM");
             // JWT     
             _HttpClient.DefaultRequestHeaders.Remove("JWT_TOKEN");
             // IP
@@ -605,7 +613,7 @@ namespace His6.Base
             }
             if (dr == DialogResult.Abort)
             {
-                Application.Exit();
+                Environment.Exit(0);
             }
             return false;
         }
